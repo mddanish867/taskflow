@@ -1,19 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { CheckCircle, BarChart2, Calendar, Users, ArrowRight, EllipsisVertical, X } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
 
 const TaskFlow = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const navigate = useNavigate();
   
-  const handleGetStarted = () => {
-    navigate("/login");
-    setIsMenuOpen(false);
-  };
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
 
   const features = [
     {
@@ -39,78 +28,7 @@ const TaskFlow = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/75 backdrop-blur-md border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16 items-center">
-            <div className="flex items-center">
-              <span className="text-2xl font-bold text-blue-600">TaskFlow</span>
-            </div>
-            
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
-              <a href="#features" className="text-gray-600 hover:text-gray-900">Features</a>
-              <a href="/pricing" className="text-gray-600 hover:text-gray-900">Pricing</a>
-              <a href="/contact" className="text-gray-600 hover:text-gray-900">Contact</a>
-              <button 
-                onClick={handleGetStarted}
-                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
-                Get Started
-              </button>
-            </div>
-
-            {/* Mobile Menu Button */}
-            <div className="md:hidden">
-              <button
-                onClick={toggleMenu}
-                className="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
-              >
-                <span className="sr-only">Open main menu</span>
-                {isMenuOpen ? (
-                  <X className="block h-6 w-6" />
-                ) : (
-                  <EllipsisVertical className="block h-6 w-6" />
-                )}
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Mobile Navigation */}
-        <div className={`md:hidden ${isMenuOpen ? 'block' : 'hidden'}`}>
-          <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-b">
-            <a
-              href="#features"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Features
-            </a>
-            <a
-              href="/pricing"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Pricing
-            </a>
-            <a
-              href="/contact"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Contact
-            </a>
-            <button
-              onClick={handleGetStarted}
-              className="w-full text-left px-3 py-2 rounded-md text-base font-medium text-white bg-blue-600 hover:bg-blue-700"
-            >
-              Get Started
-            </button>
-          </div>
-        </div>
-      </nav>
-
+    <div className="min-h-screen bg-white">  
       {/* Rest of the component remains the same */}
       <div className="pt-16">
         {/* Hero Section */}
@@ -187,23 +105,8 @@ const TaskFlow = () => {
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Footer */}
-        <footer className="py-12 border-t border-gray-800">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <div className="text-2xl font-thin tracking-wider mb-6">
-                <div className="items-center">
-                  <span className="text-2xl font-bold text-blue-600">TaskFlow</span>
-                </div>
-              </div>
-              <div className="text-sm text-gray-400">
-                © {new Date().getFullYear()} TaskFlow All rights reserved.
-              </div>
-            </div>
-          </div>
-        </footer>
+        </div>     
+        
       </div>
     </div>
   );
