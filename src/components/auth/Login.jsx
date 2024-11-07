@@ -4,10 +4,11 @@ import { Mail, ArrowRight, Lock, Loader } from 'lucide-react';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
-  const [step, setStep] = useState('email'); // email, verification
+  const [step, setStep] = useState('email');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [countdown, setCountdown] = useState(0);
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
 
   const validateEmail = (email) => {
     return email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
@@ -19,6 +20,11 @@ const Login = () => {
 
     if (!validateEmail(email)) {
       setError('Please enter a valid email address');
+      return;
+    }
+
+    if (!acceptedTerms) {
+      setError('Please accept the Terms and Conditions to continue');
       return;
     }
 
@@ -76,7 +82,9 @@ const Login = () => {
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <div className="flex justify-center">
-          <span className="text-3xl font-bold text-blue-600">TaskFlow</span>
+          <a href="/">
+            <span className="text-3xl font-bold text-blue-600">TaskFlow</span>
+          </a>
         </div>
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
           Sign in to your account
@@ -109,6 +117,27 @@ const Login = () => {
                 </div>
               </div>
 
+              <div className="flex items-start">
+                <div className="flex items-center h-5">
+                  <input
+                    id="terms"
+                    name="terms"
+                    type="checkbox"
+                    checked={acceptedTerms}
+                    onChange={(e) => setAcceptedTerms(e.target.checked)}
+                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  />
+                </div>
+                <div className="ml-3">
+                  <label htmlFor="terms" className="text-sm text-gray-500">
+                    I agree to the{' '}
+                    <a href="/terms" className="text-blue-600 hover:text-blue-500">
+                      Terms and Conditions
+                    </a>
+                  </label>
+                </div>
+              </div>
+
               {error && (
                 <div className="text-red-600 text-sm">{error}</div>
               )}
@@ -117,7 +146,7 @@ const Login = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full flex justify-center items-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  className="w-full flex justify-center items-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading ? (
                     <Loader className="animate-spin h-5 w-5" />
@@ -128,6 +157,15 @@ const Login = () => {
                     </>
                   )}
                 </button>
+              </div>
+
+              <div className="text-center">
+                <a
+                  href="/forgot-password"
+                  className="text-sm text-blue-600 hover:text-blue-500"
+                >
+                  Forgot your password?
+                </a>
               </div>
             </form>
           ) : (

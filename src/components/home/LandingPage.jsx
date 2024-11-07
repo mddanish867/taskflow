@@ -1,7 +1,12 @@
 import React from 'react';
 import { CheckCircle, BarChart2, Calendar, Users, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const TaskFlow = () => {
+ const navigate = useNavigate();
+  const handleGetStarted = () => {
+    navigate("/login")
+  }
   const features = [
     {
       title: "Task Management",
@@ -36,9 +41,11 @@ const TaskFlow = () => {
             </div>
             <div className="hidden md:flex items-center space-x-8">
               <a href="#features" className="text-gray-600 hover:text-gray-900">Features</a>
-              <a href="#pricing" className="text-gray-600 hover:text-gray-900">Pricing</a>
-              <a href="#contact" className="text-gray-600 hover:text-gray-900">Contact</a>
-              <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+              <a href="/pricing" className="text-gray-600 hover:text-gray-900">Pricing</a>
+              <a href="/contact" className="text-gray-600 hover:text-gray-900">Contact</a>
+              <button 
+              onClick={handleGetStarted}
+              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
                 Get Started
               </button>
             </div>
