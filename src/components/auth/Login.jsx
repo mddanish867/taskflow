@@ -83,7 +83,7 @@ const Login = () => {
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <div className="flex justify-center">
           <a href="/">
-            <span className="text-3xl font-bold text-blue-600">TaskFlow</span>
+            <span className="text-3xl font-bold text-blue-600">SooraAuth</span>
           </a>
         </div>
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">

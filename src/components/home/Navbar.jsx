@@ -21,7 +21,7 @@ const Navbar = () => {
           <div className="flex justify-between h-16 items-center">
             <div className="flex items-center">
               <a href='/'>
-              <span className="text-2xl font-bold text-blue-600">TaskFlow</span>
+              <span className="text-2xl font-bold text-blue-600">SooraAuth</span>
               </a>
             </div>
             

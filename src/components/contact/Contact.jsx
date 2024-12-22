@@ -79,8 +79,8 @@ const Contact = () => {
                   <Mail className="h-6 w-6 text-blue-600 mt-1" />
                   <div className="ml-4">
                     <p className="text-sm font-medium text-gray-900">Email</p>
-                    <a href="mailto:support@taskflow.com" className="text-sm text-gray-600 hover:text-blue-600">
-                      support@taskflow.com
+                    <a href="mailto:support@sooraauth.com" className="text-sm text-gray-600 hover:text-blue-600">
+                      support@sooraauth.com
                     </a>
                   </div>
                 </div>

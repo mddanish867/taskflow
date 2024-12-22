@@ -5,7 +5,7 @@ const Footer = () => {
           <div className="text-center">
             <div className="text-2xl font-thin tracking-wider mb-6">
               <div className="items-center">
-                <span className="text-2xl font-bold text-blue-600">TaskFlow</span>
+                <span className="text-2xl font-bold text-blue-600">SooraAuth</span>
               </div>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
@@ -43,7 +43,7 @@ const Footer = () => {
               </div>
             </div>
             <div className="text-sm text-gray-400 pt-8 border-t border-gray-200">
-              © {new Date().getFullYear()} TaskFlow. All rights reserved.
+              © {new Date().getFullYear()} SooraAuth. All rights reserved.
             </div>
           </div>
         </div>
