@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Mail, Lock, Loader } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -8,6 +9,7 @@ const Login = () => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -29,7 +31,7 @@ const Login = () => {
     try {
       // Simulate API call for login
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      navigate("/dashboard")
       // Handle successful login
       console.log('Login successful');
       

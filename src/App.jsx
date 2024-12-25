@@ -8,6 +8,7 @@ import Pricing from "./components/pricing/Pricing"
 import Contact from "./components/contact/Contact"
 import Layout from "./components/layout/Layout"
 import SignupForm from "./components/auth/Signup"
+import Dashboard from "./components/dashboard/dashboard"
 
 
 function App() {
@@ -20,8 +21,9 @@ function App() {
         <Route path="/" element={<TaskFlow/>} />
         <Route path="/pricing" element={<Pricing/>} />
         <Route path="/contact" element={<Contact/>} />
-        </Route>
+        <Route path="/dashboard" element={<Dashboard/>} />
 
+        </Route>
         <Route path="/signup" element={<SignupForm/>} />
         <Route path="/loginwithUsername" element={<LoginwithUsername/>} />
         <Route path="/login" element={<Login/>} />
