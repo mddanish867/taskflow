@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Lock, Loader } from 'lucide-react';
+import { Mail, Lock, Loader, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
@@ -148,13 +148,93 @@ const Login = () => {
           </form>
 
           <div className="mt-6">
-            <div className="relative">
+            <div className="relative mb-6">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-gray-300" />
               </div>
               <div className="relative flex justify-center text-sm">
                 <span className="px-2 bg-white text-gray-500">
-                  Or continue with
+                  Or
+                </span>
+              </div>
+            </div>
+
+            <div>
+                <button
+                  type="submit"
+                //   disabled={loading}
+                  className="w-full flex justify-center items-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {/* {loading ? (
+                    <Loader className="animate-spin h-5 w-5" />
+                  ) : ( */}
+                    <>
+                      Continue with Email
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </>
+                  {/* )} */}
+                </button>
+              </div>
+
+              <div className="relative mt-6 mb-6">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-300" />
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-white text-gray-500">
+                  Or
+                </span>
+              </div>
+            </div>
+            <div>
+                <button
+                  type="submit"
+                //   disabled={loading}
+                  className="w-full flex justify-center items-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {/* {loading ? (
+                    <Loader className="animate-spin h-5 w-5" />
+                  ) : ( */}
+                    <>
+                      Continue with magiclink
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </>
+                  {/* )} */}
+                </button>
+              </div>
+              <div className="relative mt-6 mb-6">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-300" />
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-white text-gray-500">
+                  Or
+                </span>
+              </div>
+            </div>
+            <div>
+                <button
+                  type="submit"
+                //   disabled={loading}
+                  className="w-full flex justify-center items-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {/* {loading ? (
+                    <Loader className="animate-spin h-5 w-5" />
+                  ) : ( */}
+                    <>
+                      Continue with SSO
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </>
+                  {/* )} */}
+                </button>
+              </div>
+            <div className="relative mt-6">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-300" />
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-white text-gray-500">
+                  Or
                 </span>
               </div>
             </div>

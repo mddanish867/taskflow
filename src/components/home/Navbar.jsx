@@ -7,7 +7,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   
   const handleGetStarted = () => {
-    navigate("/loginwithUsername");
+    navigate("/login");
     setIsMenuOpen(false);
   };
 
