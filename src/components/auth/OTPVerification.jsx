@@ -87,7 +87,12 @@ const OTPVerification = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="max-w-md w-full p-6 space-y-6 bg-white rounded-xl shadow-lg">
+      <div className="max-w-md w-full p-6 space-y-6 bg-white rounded-md shadow-md">
+      <div className="flex justify-center">
+          <a href="/">
+            <span className="text-3xl font-bold text-blue-600">SooraAuth</span>
+          </a>
+        </div>
         <div className="text-center">
           <h2 className="text-3xl font-bold text-gray-900">Verify Your Email</h2>
           <p className="mt-2 text-sm text-gray-600">
@@ -105,7 +110,7 @@ const OTPVerification = () => {
               value={otp[index]}
               onChange={e => handleInputChange(index, e.target.value)}
               onKeyDown={e => handleKeyDown(index, e)}
-              className="w-12 h-12 text-center text-xl font-semibold border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-12 h-12 text-center text-xl font-semibold outline-none border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
           ))}
         </div>

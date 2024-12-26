@@ -2,14 +2,13 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_URL } from "../constant";
 
 export const authApiSlice = createApi({
-  reducerPath: "api",
+  reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
     credentials: "include",
-    prepareHeaders: (headers) => {
-      headers.set("Content-Type", "application/json");
-      return headers;
-    },
+    headers: {
+      "Content-Type": "application/json",
+    },   
   }),
   endpoints: (builder) => ({
     registerUser: builder.mutation({
