@@ -103,7 +103,7 @@ const SignupForm = () => {
                 value={formData.username}
                 onChange={handleChange}
                 required
-                className="block w-full px-3 py-2 border rounded-md shadow-sm"
+                className="block w-full px-3 py-2 border rounded-md shadow-sm outline-none focus:ring-1 focus:ring-blue-400"
                 placeholder="Enter your username"
               />
               {errors.username && <div className="text-red-600 text-sm">{errors.username}</div>}
@@ -139,7 +139,7 @@ const SignupForm = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="block w-full px-3 py-2 border rounded-md shadow-sm"
+                className="block w-full px-3 py-2 border rounded-md shadow-sm outline-none focus:ring-1 focus:ring-blue-400"
                 placeholder="Enter your email"
               />
               {errors.email && <div className="text-red-600 text-sm">{errors.email}</div>}
@@ -175,7 +175,7 @@ const SignupForm = () => {
                 value={formData.password}
                 onChange={handleChange}
                 required
-                className="block w-full px-3 py-2 border rounded-md shadow-sm"
+                className="block w-full px-3 py-2 border rounded-md shadow-sm outline-none focus:ring-1 focus:ring-blue-400"
                 placeholder="Enter your password"
               />
               {errors.password && <div className="text-red-600 text-sm">{errors.password}</div>}
@@ -193,7 +193,7 @@ const SignupForm = () => {
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 required
-                className="block w-full px-3 py-2 border rounded-md shadow-sm"
+                className="block w-full px-3 py-2 border rounded-md shadow-sm outline-none focus:ring-1 focus:ring-blue-400"
                 placeholder="Confirm your password"
               />
               {errors.confirmPassword && (
@@ -208,7 +208,7 @@ const SignupForm = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full flex justify-center py-2 px-4 bg-blue-600 text-white rounded-md"
+                className="w-full flex justify-center py-2 px-4 bg-blue-600 text-white rounded-md "
               >
                 {loading ? <Loader className="animate-spin h-5 w-5" /> : 'Create Account'}
               </button>
