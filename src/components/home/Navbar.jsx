@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
-import {EllipsisVertical, X } from 'lucide-react';
+import {EllipsisVertical, X, Lock } from 'lucide-react';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,6 +20,7 @@ const Navbar = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
             <div className="flex items-center">
+            <Lock className="text-blue-600 font-extrabold "/> {" "}
               <a href='/'>
               <span className="text-2xl font-bold text-blue-600">SooraAuth</span>
               </a>
