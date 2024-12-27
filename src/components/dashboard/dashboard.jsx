@@ -1,114 +1,138 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
-  User,
+  UserCircle,
+  Settings,
   Shield,
-  Bell,
+  Clock,
+  LogOut,
   Trash2,
-  History,
-} from 'lucide-react';
-import { Sidebar } from './Sidebar';
-import { TabContent } from './TabContent';
+  Menu as MenuIcon,
+  X,
+} from "lucide-react";
+import { TabContent } from "./TabContent";
 
 const Dashboard = () => {
-  const [activeTab, setActiveTab] = useState('profile');
-  const [userProfile, setUserProfile] = useState({
-    name: 'John Doe',
-    email: 'john.doe@example.com',
-    mobile: '+1 234 567 8900',
-    avatar: '/api/placeholder/150/150'
-  });
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState("profile");
+  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
 
   const tabs = [
-    { id: 'profile', label: 'Profile', icon: User },
-    { id: 'sessions', label: 'Sessions', icon: History },
-    { id: 'security', label: 'Security', icon: Shield },
-    { id: 'notifications', label: 'Notifications', icon: Bell },
-    { id: 'delete', label: 'Delete Account', icon: Trash2 }
+    { id: "profile", label: "Profile", icon: UserCircle },
+    { id: "sessions", label: "Sessions", icon: Clock },
+    { id: "security", label: "Security", icon: Shield },
+    { id: "settings", label: "Settings", icon: Settings },
+    { id: "delete", label: "Delete Account", icon: Trash2 },
   ];
 
+  const userInfo = {
+    name: "John Doe",
+    email: "john@example.com",
+    avatar: "/api/placeholder/40/40",
+  };
+
   return (
-    <div className="flex bg-gray-50 py-10">
-      <div className="fixed inset-y-0 left-0 lg:relative">
-        <div className="flex h-full">
-          {/* Sidebar for small screens (icons only) */}
-          <div className="w-16 bg-white shadow-lg lg:hidden">
-            <div className="flex flex-col h-full py-4">
-              <div className="flex-shrink-0 flex justify-center pb-4">
-                <img
-                  src={userProfile.avatar}
-                  alt={userProfile.name}
-                  className="h-8 w-8 rounded-full"
-                />
-              </div>
-              <nav className="flex-1 space-y-2">
-                {tabs.map((tab) => {
-                  const Icon = tab.icon;
-                  return (
-                    <button
-                      key={tab.id}
-                      onClick={() => setActiveTab(tab.id)}
-                      className={`w-full flex justify-center p-3 ${
-                        activeTab === tab.id
-                          ? 'text-blue-600 bg-blue-50'
-                          : 'text-gray-600 hover:bg-gray-50'
-                      }`}
-                    >
-                      <Icon className="h-5 w-5" />
-                    </button>
-                  );
-                })}
-              </nav>
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <header className="bg-white shadow-sm">
+        <div className="px-4 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="lg:hidden p-2 hover:bg-gray-100 rounded-lg"
+            >
+              {isMenuOpen ? <X size={24} /> : <MenuIcon size={24} />}
+            </button>
+            <div className="flex items-center">
+              <a href="/">
+                <span className="text-2xl font-bold text-blue-600">
+                  SooraAuth
+                </span>
+              </a>
             </div>
           </div>
 
-          {/* Sidebar for large screens (icons with labels) */}
-          <div className="hidden lg:flex lg:w-64 lg:flex-col lg:bg-white lg:shadow-sm py-10">
-            <div className="flex flex-col h-full p-4">
-              
-              <nav className="flex-1 space-y-4">
-                {tabs.map((tab) => {
-                  const Icon = tab.icon;
-                  return (
-                    <button
-                      key={tab.id}
-                      onClick={() => setActiveTab(tab.id)}
-                      className={`w-full flex items-center space-x-3 px-4 py-2 rounded-md ${
-                        activeTab === tab.id
-                          ? 'text-blue-600 bg-blue-50'
-                          : 'text-gray-600 hover:bg-gray-50'
-                      }`}
-                    >
-                      <Icon className="h-5 w-5" />
-                      <span>{tab.label}</span>
-                    </button>
-                  );
-                })}
-              </nav>
-              <div className="flex-shrink-0 flex items-center space-x-3 pb-4">
-                <img
-                  src={userProfile.avatar}
-                  alt={userProfile.name}
-                  className="h-10 w-10 rounded-full"
-                />
-                <div className="flex flex-col">
-                  <span className="text-sm font-medium">{userProfile.name}</span>
-                  <span className="text-xs text-gray-500">{userProfile.email}</span>
+          {/* User Dropdown */}
+          <div className="relative">
+            <button
+              onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
+              className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-full"
+            >
+              <img
+                src={userInfo.avatar}
+                alt="User avatar"
+                className="w-8 h-8 rounded-full"
+              />
+            </button>
+            {isUserDropdownOpen && (
+              <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-1 z-10">
+                <div className="px-4 py-2 border-b">
+                  <div className="font-medium">{userInfo.name}</div>
+                  <div className="text-sm text-gray-500">{userInfo.email}</div>
                 </div>
+                <button
+                  onClick={() => console.log("Logout clicked")}
+                  className="flex items-center gap-2 w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  <LogOut size={16} />
+                  Logout
+                </button>
               </div>
-            </div>
+            )}
           </div>
         </div>
-      </div>
+      </header>
 
-      <main className="flex-1 lg:ml-1 sm:ml-28">
-        <div className="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-          <div className="bg-white shadow rounded-lg">
-            <div className="p-6">
-              <TabContent activeTab={activeTab} userProfile={userProfile} />
+      <div className="flex">
+        {/* Sidebar */}
+        <aside
+          className={`${
+            isMenuOpen ? "block" : "hidden"
+          } lg:block fixed lg:relative  left-0 w-64 bg-white border-r transform lg:transform-none lg:translate-x-0 transition-transform duration-200 ease-in-out z-20`}
+        >
+          <nav className="p-4 space-y-1">
+            {tabs.map((tab) => {
+              const Icon = tab.icon;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => {
+                    setActiveTab(tab.id);
+                    setIsMenuOpen(false);
+                  }}
+                  className={`flex items-center gap-2 w-full px-4 py-2 text-sm rounded-lg ${
+                    activeTab === tab.id
+                      ? "bg-blue-50 text-blue-600"
+                      : "text-gray-700 hover:bg-gray-100"
+                  }`}
+                >
+                  <Icon size={20} />
+                  {tab.label}
+                </button>
+              );
+            })}
+
+            <button
+              onClick={() => console.log("Logout clicked")}
+              className="flex items-center gap-2 w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg mt-4"
+            >
+              <LogOut size={20} />
+              Logout
+            </button>
+          </nav>
+        </aside>
+
+        {/* Main Content */}
+        <main className="flex-1 p-1">
+          <div className="max-w-7xl mx-auto">
+            <div className="bg-white rounded-lg shadow p-6">
+              {/* Content for each tab would go here */}
+              <p className="text-gray-600">
+                <TabContent activeTab={activeTab} userProfile={userInfo} />
+              </p>
             </div>
           </div>
-        </div>
-      </main>
+        </main>
+      </div>
     </div>
   );
 };

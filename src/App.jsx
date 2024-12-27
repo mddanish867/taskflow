@@ -22,8 +22,9 @@ function App() {
               <Route path="/" element={<TaskFlow />} />
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/dashboard" element={<Dashboard />} />
             </Route>
+            <Route path="/dashboard" element={<Dashboard />} />
+
             <Route path="/signup" element={<SignupForm />} />
             <Route path="/otp-verification" element={<OTPVerification />} />
             <Route path="/login" element={<LoginwithUsername />} />
