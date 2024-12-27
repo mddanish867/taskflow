@@ -110,7 +110,7 @@ const OTPVerification = () => {
               value={otp[index]}
               onChange={e => handleInputChange(index, e.target.value)}
               onKeyDown={e => handleKeyDown(index, e)}
-              className="w-12 h-12 text-center text-xl font-semibold outline-none border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-12 h-12 text-center text-xl font-semibold outline-none border rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
             />
           ))}
         </div>

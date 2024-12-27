@@ -27,7 +27,7 @@ function App() {
             <Route path="/signup" element={<SignupForm />} />
             <Route path="/otp-verification" element={<OTPVerification />} />
             <Route path="/login" element={<LoginwithUsername />} />
-            <Route path="/otp-log" element={<Login />} />
+            <Route path="/otp-login" element={<Login />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
           </Routes>
         </Router>
