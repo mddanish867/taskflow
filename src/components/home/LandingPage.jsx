@@ -32,7 +32,7 @@ const TaskFlow = () => {
         <div className="relative bg-white overflow-hidden">
           <div className="max-w-7xl mx-auto">
             <div className="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:pb-28 xl:pb-32">
-              <main className="mx-auto max-w-7xl px-4 sm:py-16 py-16 sm:px-6 lg:px-8">
+              <main className="mx-auto max-w-7xl px-4 sm:py-20 py-16 sm:px-6 lg:px-8">
                 <div className="text-center">
                   <span className='border border-blue-400 mt-12 rounded-full p-2 text-blue-500'>VERSION 2.0 NOW AVAILABLE</span>
 
