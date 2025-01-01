@@ -26,10 +26,17 @@ export const authApiSlice = createApi({
         body: userData,
       }),
     }),
+    loginUser: builder.mutation({
+      query: (userData) => ({
+        url: "auth/login",
+        method: "POST",
+        body: userData,
+      }),
+    }),
   }),
   
     
   
 });
 
-export const { useRegisterUserMutation,useVerifyOTPMutation } = authApiSlice;
+export const { useRegisterUserMutation,useVerifyOTPMutation,useLoginUserMutation } = authApiSlice;
