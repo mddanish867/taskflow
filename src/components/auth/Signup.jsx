@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { useRegisterUserMutation } from '../api/authAPI/authApiSlice';
 import { Loader } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import {toast} from '../helper/toast';
 
 const signupSchema = z
   .object({
@@ -56,6 +57,7 @@ const SignupForm = () => {
     if (!parsed.success) {
       const firstError = parsed.error.issues[0]?.message || 'Invalid input';
       setErrors(firstError);
+      toast.error(firstError);
       return;
     }
   
@@ -68,10 +70,15 @@ const SignupForm = () => {
         username: formData.username,
       }).unwrap();
   if(response.status === 200){
+    toast.success(response.message || 'Account created successfully!');
     navigate('/otp-verification')
+  }
+  else{
+    toast.error(response.message || 'Something went wrong');
   }
     } catch (err) {
       console.error('Error signing up:', err);
+      toast.error(err.data?.message || 'Something went wrong');
       setErrors(err.data?.message || 'Something went wrong');
     } finally {
       setLoading(false);
