@@ -1,11 +1,17 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useVerifyOTPMutation } from '../api/authAPI/authApiSlice';
+import {toast} from '../helper/toast';
+import { Loader } from 'lucide-react';
 
 const OTPVerification = () => {
-  const router = useNavigate();
+  const navigate = useNavigate();
   const [otp, setOtp] = useState(Array(6).fill(''));
   const [timer, setTimer] = useState(30);
   const [isResendActive, setIsResendActive] = useState(false);
+  const [verifyOTP] = useVerifyOTPMutation();
+  const [loading, setLoading] = useState(false);
+  
   const inputRefs = useRef([]);
   const timerRef = useRef(null);
 
@@ -54,19 +60,25 @@ const OTPVerification = () => {
   const handleSubmit = async () => {
     const otpValue = otp.join('');
     if (otpValue.length !== 6) return;
-
-    try {
-      const response = await fetch('/api/auth/verify-otp', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ otp: otpValue }),
-      });
-
-      if (response.ok) {
-        router('/login');
-      }
+    const email = localStorage.getItem('email');
+    setLoading(true);
+    try {      
+      const response = await verifyOTP({
+        email: email,
+        otp: otpValue
+      }).unwrap();
+      if(response.status === 200){
+          toast.success(response.message || 'Account verified successfully!');
+          navigate('/login')
+        }
+        else{
+          toast.error(response.message || 'Something went wrong');
+        }      
     } catch (error) {
       console.error('OTP verification failed:', error);
+      toast.error(error.data?.message || 'Something went wrong');
+    }finally {
+      setLoading(false);
     }
   };
 
@@ -132,11 +144,11 @@ const OTPVerification = () => {
         </div>
 
         <button
-          onClick={handleSubmit}
+          onClick={handleSubmit}          
           disabled={otp.join('').length !== 6}
-          className="w-full py-3 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
+          className="w-full flex justify-center py-2 px-4 bg-blue-600 text-white rounded-md disabled:opacity-50"
         >
-          Verify Email
+         {loading ? <Loader className="animate-spin h-5 w-5" /> : 'Verify Email'}
         </button>
       </div>
     </div>

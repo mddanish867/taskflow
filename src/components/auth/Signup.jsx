@@ -71,6 +71,7 @@ const SignupForm = () => {
       }).unwrap();
   if(response.status === 200){
     toast.success(response.message || 'Account created successfully!');
+    localStorage.setItem('email', formData.email);
     navigate('/otp-verification')
   }
   else{
