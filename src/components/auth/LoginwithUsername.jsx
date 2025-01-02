@@ -143,16 +143,7 @@ const Login = () => {
                   <Lock className="h-5 w-5 text-gray-400" />
                 </div>
               </div>
-            </div>
-
-            {/* Render errors dynamically */}
-            {Object.keys(errors).length > 0 && (
-              <div className="text-red-600 text-sm">
-                {Object.keys(errors).map((key) => (
-                  <div key={key}>{errors[key]}</div>
-                ))}
-              </div>
-            )}
+            </div>         
 
             <div>
               <button
@@ -167,6 +158,14 @@ const Login = () => {
                 )}
               </button>
             </div>
+            <div className="text-center">
+                <a
+                  href="/forgot-password"
+                  className="text-sm text-blue-600 hover:text-blue-500"
+                >
+                  Forgot your password?
+                </a>
+              </div>
           </form>
 
           {/* Continue with email, magic link, and SSO buttons */}

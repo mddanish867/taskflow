@@ -122,7 +122,6 @@ const SignupForm = () => {
                   type={field.includes('password') ? 'password' : 'text'}
                   value={formData[field]}
                   onChange={handleChange}
-                  required
                   className={`block w-full px-3 py-2 border rounded-md shadow-sm outline-none focus:ring-1 focus:ring-blue-400 ${
                     errors[field] && 'border-red-600'
                   }`}

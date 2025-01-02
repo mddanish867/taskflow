@@ -1,15 +1,15 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useVerifyOTPMutation } from '../api/authAPI/authApiSlice';
+import { useOtpVerificationMutation } from '../api/authAPI/authApiSlice';
 import {toast} from '../helper/toast';
 import { Loader } from 'lucide-react';
 
-const OTPVerification = () => {
+const VerifyOTP = () => {
   const navigate = useNavigate();
   const [otp, setOtp] = useState(Array(6).fill(''));
   const [timer, setTimer] = useState(30);
   const [isResendActive, setIsResendActive] = useState(false);
-  const [verifyOTP] = useVerifyOTPMutation();
+  const [verifyOTP] = useOtpVerificationMutation();
   const [loading, setLoading] = useState(false);
   
   const inputRefs = useRef([]);
@@ -68,8 +68,8 @@ const OTPVerification = () => {
         otp: otpValue
       }).unwrap();
       if(response.status === 200){
-          toast.success(response.message || 'Account verified successfully!');
-          navigate('/login')
+          toast.success(response.message || 'OTP verified successfully!');
+          navigate('/reset-password')
         }
         else{
           toast.error(response.message || 'Something went wrong');
@@ -154,5 +154,4 @@ const OTPVerification = () => {
     </div>
   );
 };
-
-export default OTPVerification;
+export default VerifyOTP

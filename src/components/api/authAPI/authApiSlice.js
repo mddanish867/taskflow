@@ -33,10 +33,31 @@ export const authApiSlice = createApi({
         body: userData,
       }),
     }),
+    forgotPassword: builder.mutation({
+      query: (userData) => ({
+        url: "auth/forgot-password",
+        method: "POST",
+        body: userData,
+      }),
+    }),
+    otpVerification: builder.mutation({
+      query: (userData) => ({
+        url: "auth/forgot-otp",
+        method: "POST",
+        body: userData,
+      }),
+    }),
+    resetPassword: builder.mutation({
+      query: (userData) => ({
+        url: "auth/reset-password",
+        method: "POST",
+        body: userData,
+      }),
+    }),
   }),
   
     
   
 });
 
-export const { useRegisterUserMutation,useVerifyOTPMutation,useLoginUserMutation } = authApiSlice;
+export const { useRegisterUserMutation,useVerifyOTPMutation,useLoginUserMutation,useForgotPasswordMutation, useOtpVerificationMutation, useResetPasswordMutation } = authApiSlice;

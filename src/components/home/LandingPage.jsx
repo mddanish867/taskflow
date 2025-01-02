@@ -6,47 +6,56 @@ const TaskFlow = () => {
     {
       title: "Email and password",
       description: "Email and password login with just a few lines of code secured with state of the art Argon2 hashing.",
-      icon: <CheckCircle className="w-6 h-6 text-blue-500" />
+      icon: <CheckCircle className="w-6 h-6 text-blue-500" />,
+      url: "/login"
     },
     {
       title: "Phone (SMS)",
       description: "Log in users without a password using their phone number and SMS verification.",
-      icon: <BarChart2 className="w-6 h-6 text-blue-500" />
+      icon: <BarChart2 className="w-6 h-6 text-blue-500" />,
+      url: "/sms-login"
     },
     {
       title: "Magic URL",
       description: "Passwordless login with a magic link sent to the user's email.",
-      icon: <Calendar className="w-6 h-6 text-blue-500" />
+      icon: <Calendar className="w-6 h-6 text-blue-500" />,
+      url: "/magic-login"
     },
     {
       title: "Email OTP",
       description: "Generate a time-based single-use password sent to the user's email.",
-      icon: <Users className="w-6 h-6 text-blue-500" />
+      icon: <Users className="w-6 h-6 text-blue-500" />,
+      url: "/email-login"
     },
     {
       title: "OAuth 2",
       description: "Authenticate users with existing accounts from GitHub, Google, Facebook, and 30+ other providers.",
-      icon: <Users className="w-6 h-6 text-blue-500" />
+      icon: <Users className="w-6 h-6 text-blue-500" />,
+      url: "/oAuth"
     },
     {
       title: "Anonymous",
       description: "Create guest sessions for visitors and convert to full accounts when they're ready.",
-      icon: <Users className="w-6 h-6 text-blue-500" />
+      icon: <Users className="w-6 h-6 text-blue-500" />,
+      url: "/guest-login"
     },
     {
       title: "JWT",
       description: "Deligate access for a user through passing JWT tokens.",
-      icon: <Users className="w-6 h-6 text-blue-500" />
+      icon: <Users className="w-6 h-6 text-blue-500" />,
+      url: "/login"
     },
     {
       title: "Custom token",
       description: "Implement custom authentication methods like biometric and passkey login by generating custom tokens.",
-      icon: <Users className="w-6 h-6 text-blue-500" />
+      icon: <Users className="w-6 h-6 text-blue-500" />,
+      url: "/token-login"
     },
     {
       title: "Multi-factor authentication",
       description: "Implementing MFA to add extra layers of security to your app.",
-      icon: <Users className="w-6 h-6 text-blue-500" />
+      icon: <Users className="w-6 h-6 text-blue-500" />,
+      url: "/enable-2fa"
     }
   ];
 
