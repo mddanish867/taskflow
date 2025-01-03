@@ -10,11 +10,17 @@ import {
   X,
 } from "lucide-react";
 import { TabContent } from "./TabContent";
+import { useGetUserQuery } from "../api/authAPI/authApiSlice";
+import { useLogoutMutation } from "../api/authAPI/authApiSlice";
+import { toast } from "../helper/toast";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("profile");
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
+  const [isLoggedOut] = useLogoutMutation();
+  const navigate = useNavigate();
 
   const tabs = [
     { id: "profile", label: "Profile", icon: UserCircle },
@@ -30,6 +36,22 @@ const Dashboard = () => {
     avatar: "/api/placeholder/40/40",
   };
 
+  const handleLogOut = async (e) => {
+ try {
+        const response = await isLoggedOut().unwrap();
+    if(response.status === 200){
+      localStorage.clear();
+      toast.success(response.message || `Logout successfully!`);      
+      navigate('/login')
+    }
+    else{
+      toast.error(response.message || 'Something went wrong');
+    }
+      } catch (err) {        
+        const message = err.data?.message || 'Something went wrong';        
+        toast.error(message);
+      } 
+  }
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -70,7 +92,7 @@ const Dashboard = () => {
                   <div className="text-sm text-gray-500">{userInfo.email}</div>
                 </div>
                 <button
-                  onClick={() => console.log("Logout clicked")}
+                  onClick={handleLogOut}
                   className="flex items-center gap-2 w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >
                   <LogOut size={16} />
@@ -87,7 +109,7 @@ const Dashboard = () => {
         <aside
           className={`${
             isMenuOpen ? "block" : "hidden"
-          } lg:block fixed lg:relative  left-0 w-64 bg-white border-r transform lg:transform-none lg:translate-x-0 transition-transform duration-200 ease-in-out z-20`}
+          } min-h-screen lg:block fixed lg:relative  left-0 w-64 bg-white border-r transform lg:transform-none lg:translate-x-0 transition-transform duration-200 ease-in-out z-20`}
         >
           <nav className="p-4 space-y-1">
             {tabs.map((tab) => {
@@ -112,8 +134,8 @@ const Dashboard = () => {
             })}
 
             <button
-              onClick={() => console.log("Logout clicked")}
-              className="flex items-center gap-2 w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg mt-4"
+              onClick={handleLogOut}
+              className="flex items-center gap-20 w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg mt-4"
             >
               <LogOut size={20} />
               Logout
