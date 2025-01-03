@@ -95,7 +95,7 @@ const Dashboard = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <Loader className="animate-spin h-24 w-24" />
+        <Loader className="animate-spin h-20 w-20" text-blue-600 />
       </div>
     );
   }
