@@ -13,8 +13,9 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 import VerifyOTP from "./components/auth/VerifyOTP";
 import ResetPassword from "./components/auth/ResetPassword";
+import PrivateRoute from "./components/utils/PrivateRoute";
 
-function App() {
+function App() {  
   return (
     <>
       <Provider store={store}>
@@ -25,7 +26,7 @@ function App() {
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/contact" element={<Contact />} />
             </Route>
-            <Route path="/dashboard" element={<Dashboard />} />
+            {/* <Route path="/dashboard" element={<Dashboard />} /> */}
 
             <Route path="/signup" element={<SignupForm />} />
             <Route path="/otp-verification" element={<OTPVerification />} />
@@ -35,6 +36,11 @@ function App() {
             <Route path="/otp-login" element={<Login />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<ResetPassword/>} />
+{/* 
+Private Route */}
+            <Route element={<PrivateRoute />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+            </Route>
 
           </Routes>
         </Router>

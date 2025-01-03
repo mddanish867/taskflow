@@ -52,6 +52,9 @@ const Login = () => {
       }).unwrap();
       if (response.status === 200) {
         toast.success(response.message || "Account created successfully!");
+        if (response.access_token) {
+          localStorage.setItem("access_token", response.access_token);
+        }
         navigate("/dashboard");
       } else {
         toast.error(response.message || "Something went wrong");

@@ -5,7 +5,7 @@ export const authApiSlice = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
-    credentials: "include",
+    credentials: "include", // Ensures cookies are included in requests
     prepareHeaders: (headers) => {
       headers.set("Content-Type", "application/json");
       return headers;
@@ -54,10 +54,25 @@ export const authApiSlice = createApi({
         body: userData,
       }),
     }),
+    getUser: builder.query({
+      query: (userId) => `get-user/${userId}`,
+    }),
+    logout: builder.mutation({
+      query: () => ({
+        url: "logout",
+        method: "POST",
+      }),
+    }),   
   }),
-  
-    
-  
 });
 
-export const { useRegisterUserMutation,useVerifyOTPMutation,useLoginUserMutation,useForgotPasswordMutation, useOtpVerificationMutation, useResetPasswordMutation } = authApiSlice;
+export const { 
+  useRegisterUserMutation,
+  useVerifyOTPMutation,
+  useLoginUserMutation,
+  useForgotPasswordMutation,
+  useOtpVerificationMutation,
+  useResetPasswordMutation,
+  useGetUserQuery,
+  useLogoutMutation,
+} = authApiSlice;
