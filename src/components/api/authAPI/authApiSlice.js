@@ -55,7 +55,9 @@ export const authApiSlice = createApi({
       }),
     }),
     getUser: builder.query({
-      query: (userId) => `get-user/${userId}`,
+      query: (email) => ({
+        url: `auth/get-user?email=${email}`,        
+      }),
     }),
     logout: builder.mutation({
       query: () => ({
