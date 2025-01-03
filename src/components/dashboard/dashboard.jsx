@@ -40,7 +40,7 @@ const Dashboard = () => {
   const displayImageOrInitials = () => {
     if (!userData?.data) {
       return (
-        <div className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-500 text-white">
+        <div className="w-8 h-8 flex items-center justify-center rounded-full bg-blue-500 text-white">
           XX
         </div>
       );
