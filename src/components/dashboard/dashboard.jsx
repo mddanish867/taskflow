@@ -63,7 +63,7 @@ const Dashboard = () => {
       : user.email.slice(0, 2).toUpperCase();
 
     return (
-      <div className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-500 text-white">
+      <div className="w-8 h-8 flex items-center justify-center rounded-full bg-blue-500 text-white">
         {initials}
       </div>
     );
