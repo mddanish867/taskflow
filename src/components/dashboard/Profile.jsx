@@ -99,7 +99,7 @@ const Profile = ({ userProfile }) => {
     <div className="space-y-6">
       <div className="flex items-center space-x-8">
         <div className="relative">
-          <div className="w-32 h-32 rounded-full bg-gray-200 flex items-center justify-center">
+          <div className="w-32 h-32 rounded-full bg-gray-100 text-blue-500 flex items-center justify-center">
             {userProfile?.name ? (
               userProfile.name.slice(0, 2).toUpperCase()
             ) : (
