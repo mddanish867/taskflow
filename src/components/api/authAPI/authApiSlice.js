@@ -65,6 +65,13 @@ export const authApiSlice = createApi({
         method: "POST",
       }),
     }),   
+    updateProfile: builder.mutation({
+      query: (userData) => ({
+        url: "auth/update-profile",
+        method: "POST",
+        body: userData,
+      }),
+    }),
   }),
 });
 
@@ -77,4 +84,5 @@ export const {
   useResetPasswordMutation,
   useGetUserQuery,
   useLogoutMutation,
+  useUpdateProfileMutation
 } = authApiSlice;
