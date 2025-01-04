@@ -1,5 +1,4 @@
-import React, { useState, useCallback } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useCallback, useEffect } from "react";
 import { z } from "zod";
 import {
   useUpdatePasswordMutation,
@@ -26,7 +25,7 @@ const securitySchema = z
     path: ["confirmNewPassword"],
   });
 
-const Security = () => {
+const Security = ({ userProfile = {} }) => {
   const [formData, setFormData] = useState({
     currentPassword: "",
     newPassword: "",
@@ -36,10 +35,18 @@ const Security = () => {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [is2FALoading, setIs2FALoading] = useState(false);
-  const [is2FAEnabled, setIS2FAEnabled] = useState(localStorage.getItem("is2FAEnabled"));
+  const [is2FAEnabled, setIS2FAEnabled] = useState(
+    userProfile?.is2FAEnabled || false
+  );
   const [updatePassword] = useUpdatePasswordMutation();
   const [enable2FA] = useEnable2FAMutation();
   const [disable2FA] = useDisable2FAMutation();
+
+  useEffect(() => {
+    if (userProfile) {
+      setIS2FAEnabled(userProfile.is2FAEnabled || false);
+    }
+  }, [userProfile]);
 
   // Get email from token
   const email = React.useMemo(() => {

@@ -15,7 +15,7 @@ export const TabContent = ({ activeTab, userProfile }) => {
       return <Sessions />;
 
     case "security":
-      return <Security/>;
+      return <Security userProfile={userProfile}/>;
 
     case "delete":
       return<DeleteAccount/>;
