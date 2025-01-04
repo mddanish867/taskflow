@@ -126,14 +126,12 @@ const Security = ({ userProfile = {} }) => {
         response = await enable2FA({ email }).unwrap();
         if (response.success) {
           setIS2FAEnabled(true);
-          localStorage.setItem("is2FAEnabled", true)
           toast.success(response.message || "2FA enabled successfully!");
         }
       } else {
         // Disable 2FA
         response = await disable2FA({ email }).unwrap();
         if (response.success) {
-          localStorage.setItem("is2FAEnabled", true)
           setIS2FAEnabled(false);
           toast.success(response.message || "2FA disabled successfully!");
         }
