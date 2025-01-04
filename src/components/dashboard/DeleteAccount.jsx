@@ -1,7 +1,43 @@
-import React from 'react'
-import { AlertTriangle } from "lucide-react";
+import React, { useState, useCallback } from 'react';
+import { AlertTriangle,Loader } from "lucide-react";
+import { z } from 'zod';
+import { useDeleteAccountMutation } from '../api/authAPI/authApiSlice';
+import { useNavigate } from 'react-router-dom';
+import { toast } from '../helper/toast';
 
+const deleteSchema = z
+  .object({    
+    email: z.string().email('Invalid email address'),
+    password: z.string().min(8, 'Password must be at least 8 characters'),
+    reason: z.string(),
+  })
+  .refine(
+    (data) => data.password === data.confirmPassword,
+    {
+      message: 'Passwords do not match',
+      path: ['confirmPassword'], // Assign error to confirmPassword field
+    }
+  );
 const DeleteAccount = () => {
+  const [formData, setFormData] = useState({
+      email: '',
+      password: '',
+      reason: '',
+    });
+
+    const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [deleteAccount] = useDeleteAccountMutation();
+  const navigate = useNavigate();
+
+  const handleChange = useCallback(
+      (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+        setErrors((prev) => ({ ...prev, [e.target.name]: '' }));
+      },
+      [formData]
+    );
+
   return (
     <div className="space-y-6">
           <div className="bg-red-50 border border-red-200 rounded-md p-4">

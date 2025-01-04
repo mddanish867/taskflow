@@ -1,5 +1,13 @@
 import React from "react";
-import { Bell, Globe, Moon, Sun,TriangleAlert, LogIn, User } from "lucide-react";
+import {
+  Bell,
+  Globe,
+  Moon,
+  Sun,
+  TriangleAlert,
+  LogIn,
+  User,
+} from "lucide-react";
 
 const SettingsForm = () => {
   return (
@@ -77,22 +85,16 @@ const SettingsForm = () => {
               <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
             </label>
           </div>
-        </div>
-      </div>
-      <div>
-        <h3 className="text-lg font-medium text-gray-900 mb-4">
-        Email Notifications
-        </h3>
-        <div className="space-y-4">
+
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <TriangleAlert size={20} className="text-gray-500" />
               <div>
                 <span className="text-sm font-medium text-gray-700">
-                Security Alerts
+                  Security Alerts
                 </span>
                 <p className="text-sm text-gray-500">
-                Get notified about security updates
+                  Get notified about security updates
                 </p>
               </div>
             </div>
@@ -101,32 +103,16 @@ const SettingsForm = () => {
               <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
             </label>
           </div>
+
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <LogIn size={20} className="text-gray-500" />
               <div>
                 <span className="text-sm font-medium text-gray-700">
-                New Login
+                  New Login
                 </span>
                 <p className="text-sm text-gray-500">
-                Get notified when a new device logs in
-                </p>
-              </div>
-            </div>
-            <label className="relative inline-flex items-center cursor-pointer">
-              <input type="checkbox" className="sr-only peer outline-none" />
-              <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-            </label>
-          </div>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-            <User size={20} className="text-gray-500" />
-              <div>
-                <span className="text-sm font-medium text-gray-700">
-                Account Updates
-                </span>
-                <p className="text-sm text-gray-500">
-                Get notified about account changes
+                  Get notified when a new device logs in
                 </p>
               </div>
             </div>
@@ -137,7 +123,7 @@ const SettingsForm = () => {
           </div>
         </div>
       </div>
-     
+
       {/* Save Button */}
       <div className="flex justify-end">
         <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">

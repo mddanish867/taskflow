@@ -93,6 +93,13 @@ export const authApiSlice = createApi({
         body: userData,
       }),
     }),
+    deleteAccount: builder.mutation({
+      query: (userData) => ({
+        url: "auth/delete-account",
+        method: "POST",
+        body: userData,
+      }),
+    }),
   }),
 });
 
@@ -108,5 +115,6 @@ export const {
   useUpdateProfileMutation,
   useUpdatePasswordMutation,
   useEnable2FAMutation,
-  useDisable2FAMutation
+  useDisable2FAMutation,
+  useDeleteAccountMutation
 } = authApiSlice;

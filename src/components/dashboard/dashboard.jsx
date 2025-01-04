@@ -95,7 +95,7 @@ const Dashboard = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <Loader className="animate-spin h-16 w-16 text-blue-600"  />
+        <Loader className="animate-spin h-16 w-16 text-blue-600" />
       </div>
     );
   }
@@ -155,27 +155,29 @@ const Dashboard = () => {
             isMenuOpen ? "block" : "hidden"
           } min-h-screen lg:block fixed lg:relative left-0 w-64 bg-white border-r transform lg:transform-none lg:translate-x-0 transition-transform duration-200 ease-in-out z-20`}
         >
-          <nav className="p-4 space-y-1">
-            {tabs.map((tab) => {
-              const Icon = tab.icon;
-              return (
-                <button
-                  key={tab.id}
-                  onClick={() => {
-                    setActiveTab(tab.id);
-                    setIsMenuOpen(false);
-                  }}
-                  className={`flex items-center gap-2 w-full px-4 py-2 text-sm rounded-lg ${
-                    activeTab === tab.id
-                      ? "bg-blue-50 text-blue-600"
-                      : "text-gray-700 hover:bg-gray-100"
-                  }`}
-                >
-                  <Icon size={20} />
-                  {tab.label}
-                </button>
-              );
-            })}
+          <div className="flex flex-col h-full">
+            <nav className="p-4 space-y-1 flex-grow">
+              {tabs.map((tab) => {
+                const Icon = tab.icon;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => {
+                      setActiveTab(tab.id);
+                      setIsMenuOpen(false);
+                    }}
+                    className={`flex items-center gap-2 w-full px-4 py-2 text-sm rounded-lg ${
+                      activeTab === tab.id
+                        ? "bg-blue-50 text-blue-600"
+                        : "text-gray-700 hover:bg-gray-100"
+                    }`}
+                  >
+                    <Icon size={20} />
+                    {tab.label}
+                  </button>
+                );
+              })}
+            </nav>
             <button
               onClick={handleLogOut}
               className="flex items-center gap-2 w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg mt-4"
@@ -183,7 +185,7 @@ const Dashboard = () => {
               <LogOut size={20} />
               Logout
             </button>
-          </nav>
+          </div>
         </aside>
 
         {/* Main Content */}
