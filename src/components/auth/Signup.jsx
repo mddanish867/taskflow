@@ -138,7 +138,7 @@ const SignupForm = () => {
                 type="submit"
                 disabled={loading}
                 className={`w-full flex justify-center py-2 px-4 rounded-md ${
-                  loading ? 'bg-gray-500' : 'bg-blue-600'
+                  loading ? 'bg-blue-500' : 'bg-blue-600'
                 } text-white`}
               >
                 {loading ? <Loader className="animate-spin h-5 w-5" /> : 'Create Account'}

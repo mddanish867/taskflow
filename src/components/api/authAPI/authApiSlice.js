@@ -72,6 +72,27 @@ export const authApiSlice = createApi({
         body: userData,
       }),
     }),
+    updatePassword: builder.mutation({
+      query: (userData) => ({
+        url: "auth/update-password",
+        method: "POST",
+        body: userData,
+      }),
+    }),
+    enable2FA: builder.mutation({
+      query: (userData) => ({
+        url: "auth/enable-2fa",
+        method: "POST",
+        body: userData,
+      }),
+    }),
+    disable2FA: builder.mutation({
+      query: (userData) => ({
+        url: "auth/disable-2fa",
+        method: "POST",
+        body: userData,
+      }),
+    }),
   }),
 });
 
@@ -84,5 +105,8 @@ export const {
   useResetPasswordMutation,
   useGetUserQuery,
   useLogoutMutation,
-  useUpdateProfileMutation
+  useUpdateProfileMutation,
+  useUpdatePasswordMutation,
+  useEnable2FAMutation,
+  useDisable2FAMutation
 } = authApiSlice;
