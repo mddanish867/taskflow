@@ -40,7 +40,7 @@ const Dashboard = () => {
   const displayImageOrInitials = () => {
     if (!userData?.data) {
       return (
-        <div className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-500 text-white">
+        <div className="w-8 h-8 flex items-center justify-center rounded-full bg-blue-600 text-white">
           XX
         </div>
       );
@@ -63,7 +63,7 @@ const Dashboard = () => {
       : user.email.slice(0, 2).toUpperCase();
 
     return (
-      <div className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-500 text-white">
+      <div className="w-8 h-8 flex items-center justify-center rounded-full bg-blue-600 text-white">
         {initials}
       </div>
     );
@@ -95,7 +95,7 @@ const Dashboard = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <Loader className="animate-spin h-5 w-5" />
+        <Loader className="animate-spin h-20 w-20" text-blue-600 />
       </div>
     );
   }
