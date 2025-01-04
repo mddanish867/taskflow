@@ -65,9 +65,15 @@
 
 // export default Profile
 import React, { useState } from 'react';
-import { Camera } from "lucide-react";
+import { Camera, Loader, ArrowRight } from "lucide-react";
+import { useUpdateProfileMutation } from "../api/authAPI/authApiSlice";
+import { toast } from "../helper/toast";
+  //const [errors, setErrors] = useState({});
+  
 
 const Profile = ({ userProfile }) => {
+  const [loading, setLoading] = useState(false);
+  const [profile] = useUpdateProfileMutation();  
   const [formData, setFormData] = useState({
     name: userProfile?.name || '',
     email: userProfile?.email || '',
@@ -82,9 +88,29 @@ const Profile = ({ userProfile }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit= async (e) => {
     e.preventDefault();
-    // Add your update logic here
+     setLoading(true);
+     try {
+             const response = await profile({
+               email: formData.email, 
+               name: formData.name,
+               mobile: formData.mobile         
+             }).unwrap();
+         if(response.status === 200){
+           toast.success(response.message || `Profile updated succesfully`);          
+         }
+         else{
+           toast.error(response.message || 'Something went wrong');
+         }
+           } catch (err) {
+             console.error('Error updating profile:', err);
+             const message = err.data?.message || 'Something went wrong';
+            // setErrors({ general: message });
+             toast.error(message);
+           } finally {
+             setLoading(false);
+           }
   };
 
   const formatDate = (dateString) => {
@@ -99,7 +125,7 @@ const Profile = ({ userProfile }) => {
     <div className="space-y-6">
       <div className="flex items-center space-x-8">
         <div className="relative">
-          <div className="w-32 h-32 rounded-full bg-gray-100 text-blue-500 flex items-center justify-center">
+          <div className="w-32 h-32 rounded-full bg-gray-100 text-3xl font-bold text-blue-500 flex items-center justify-center">
             {userProfile?.name ? (
               userProfile.name.slice(0, 2).toUpperCase()
             ) : (
@@ -161,10 +187,18 @@ const Profile = ({ userProfile }) => {
 
         <div className="flex justify-end">
           <button 
+          disabled={loading}          
             type="submit"
             className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
           >
-            Save Changes
+            {loading ? (
+                  <Loader className="animate-spin h-5 w-5" />
+                ) : (
+                  <>
+                    Save Changes                    
+                  </>
+                )}
+            
           </button>
         </div>
       </form>
