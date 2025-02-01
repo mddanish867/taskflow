@@ -106,10 +106,14 @@ const VerifyOTP = () => {
           </a>
         </div>
         <div className="text-center">
-          <h2 className="text-3xl font-bold text-gray-900">Verify Your Email</h2>
-          <p className="mt-2 text-sm text-gray-600">
-            We've sent a 6 digit code to your <span className='text-blue-500'>{email}</span>. Please enter it below.
+          <h2 className="text-3xl font-semibold text-gray-900 ">Verify Your Email</h2>
+          <p className="mt-2 mb-2 text-sm text-gray-600">
+            We've sent a 6 digit code to your email <br/> 
+            
+            Please enter it below.<br/>
+           
           </p>
+          <span className='text-blue-500 font-semibold'>{email}</span>. 
         </div>
 
         <div className="flex gap-2 justify-center">
@@ -127,22 +131,6 @@ const VerifyOTP = () => {
           ))}
         </div>
 
-        <div className="text-center">
-          {timer > 0 ? (
-            <p className="text-sm text-gray-600">
-              Resend code in <span className="font-semibold">{timer}s</span>
-            </p>
-          ) : (
-            <button
-              onClick={handleResendOTP}
-              disabled={!isResendActive}
-              className="text-sm text-blue-600 hover:text-blue-800"
-            >
-              Resend Code
-            </button>
-          )}
-        </div>
-
         <button
           onClick={handleSubmit}          
           disabled={otp.join('').length !== 6}
@@ -150,7 +138,23 @@ const VerifyOTP = () => {
         >
          {loading ? <Loader className="animate-spin h-5 w-5" /> : 'Verify OTP'}
         </button>
+        <div className="text-center">
+        <button
+              onClick={handleResendOTP}
+              disabled={!isResendActive}
+              className="text-sm text-blue-600 hover:text-blue-800 cursor-pointer hover:underline"
+            >
+              Didn't receive an email? Resend email
+            </button>
+            <button             
+              disabled={!isResendActive}
+              className="text-sm text-blue-600 hover:text-blue-800 cursor-pointer hover:underline"
+            >
+              Log in to a different account
+            </button>
+        </div>
       </div>
+      
     </div>
   );
 };

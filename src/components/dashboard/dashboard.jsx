@@ -9,6 +9,8 @@ import {
   Menu as MenuIcon,
   X,
   Loader,
+  Moon,
+  Users
 } from "lucide-react";
 import { TabContent } from "./TabContent";
 import {
@@ -18,6 +20,7 @@ import {
 import { toast } from "../helper/toast";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import UserDropdown from '../auth/UserDropdown';
 
 const Dashboard = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -37,6 +40,7 @@ const Dashboard = () => {
 
   const { data: userData, isLoading } = useGetUserQuery(email);
 
+ 
   const displayImageOrInitials = () => {
     if (!userData?.data) {
       return (
@@ -83,6 +87,9 @@ const Dashboard = () => {
       toast.error(err.data?.message || "Something went wrong");
     }
   };
+  const handleSwitchAccount = () => {
+    navigate("/add-account")
+  }
 
   const tabs = [
     { id: "profile", label: "Profile", icon: UserCircle },
@@ -126,23 +133,15 @@ const Dashboard = () => {
               {displayImageOrInitials()}
             </button>
             {isUserDropdownOpen && userData?.data && (
-              <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-1 z-10">
-                <div className="px-4 py-2 border-b">
-                  <div className="font-medium">
-                    {userData.data.name || userData.data.email}
-                  </div>
-                  <div className="text-sm text-gray-500">
-                    {userData.data.email}
-                  </div>
-                </div>
-                <button
-                  onClick={handleLogOut}
-                  className="flex items-center gap-2 w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                >
-                  <LogOut size={16} />
-                  Logout
-                </button>
-              </div>
+             <UserDropdown
+             isOpen={isUserDropdownOpen}
+             userData={userData}
+             handleLogOut={handleLogOut}
+             onClose={() => setIsUserDropdownOpen(false)}
+             displayImageOrInitials={displayImageOrInitials}
+             handleSwitchAccount={handleSwitchAccount}
+             setActiveTab = {setActiveTab}
+           />
             )}
           </div>
         </div>
