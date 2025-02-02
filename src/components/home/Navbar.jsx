@@ -168,6 +168,7 @@ const Navbar = () => {
                   >
                     {displayInitials()}
                   </button>
+                  <div className='right-10'>
                   <UserDropdown
                     isOpen={isUserDropdownOpen}
                     userData={userData}
@@ -176,6 +177,7 @@ const Navbar = () => {
                     displayImageOrInitials={displayImageOrInitials}
                     handleSwitchAccount={handleSwitchAccount}
                   />
+                  </div>
                 </div>
               ) }
               <button
