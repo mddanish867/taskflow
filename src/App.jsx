@@ -16,7 +16,7 @@ import ResetPassword from "./components/auth/ResetPassword";
 import PrivateRoute from "./components/utils/PrivateRoute";
 import AccountSelection from "./components/auth/AccountSelection";
 
-function App() {  
+function App() {
   return (
     <>
       <Provider store={store}>
@@ -36,13 +36,12 @@ function App() {
             <Route path="/login" element={<LoginwithUsername />} />
             <Route path="/otp-login" element={<Login />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/reset-password" element={<ResetPassword/>} />
-{/* 
+            <Route path="/reset-password" element={<ResetPassword />} />
+            {/* 
 Private Route */}
             <Route element={<PrivateRoute />}>
               <Route path="/dashboard" element={<Dashboard />} />
             </Route>
-
           </Routes>
         </Router>
       </Provider>

@@ -44,7 +44,7 @@ const Dashboard = () => {
   const displayImageOrInitials = () => {
     if (!userData?.data) {
       return (
-        <div className="w-8 h-8 flex items-center justify-center rounded-full bg-blue-600 text-white">
+        <div className="w-16 h-16 flex items-center justify-center rounded-full bg-blue-600 text-white">
           XX
         </div>
       );
@@ -57,7 +57,7 @@ const Dashboard = () => {
         <img
           src={user.picture}
           alt="User avatar"
-          className="w-8 h-8 rounded-full"
+          className="w-16 h-16 rounded-full"
         />
       );
     }
@@ -67,7 +67,7 @@ const Dashboard = () => {
       : user.email.slice(0, 2).toUpperCase();
 
     return (
-      <div className="w-8 h-8 flex items-center justify-center rounded-full bg-blue-600 text-white">
+      <div className="w-10 h-10 flex items-center font-semibold justify-center rounded-full bg-blue-600 text-white">
         {initials}
       </div>
     );
@@ -125,7 +125,7 @@ const Dashboard = () => {
           </div>
 
           {/* User Dropdown */}
-          <div className="relative">
+          <div className="relative right-4">
             <button
               onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
               className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-full"
