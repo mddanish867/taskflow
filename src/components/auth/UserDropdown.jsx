@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Settings, Moon, Users, LogOut } from "lucide-react";
-
+import { useLocation } from "react-router-dom";
 const UserDropdown = ({
   isOpen,
   userData,
@@ -12,10 +12,12 @@ const UserDropdown = ({
   onClose,
 }) => {
   if (!isOpen || !userData?.data) return null;
+  const location = useLocation();
 
+ // Determine the right positioning based on the pathname
+ const rightPosition = location.pathname === "/dashboard" ? "-right-6" : "-right-10";
   return (
-    <div className="absolute -right-10 mt-2 w-80 bg-white rounded-lg shadow-lg py-1 z-10">
-      <div className="flex flex-row px-4 py-2 border-b bg-gray-100">
+    <div className={`absolute ${rightPosition} mt-2 w-80 bg-white rounded-lg shadow-lg py-1 z-10`}>      <div className="flex flex-row px-4 py-2 border-b bg-gray-100">
         <div className="w-20 h-20 rounded-full bg-blue-500 text-3xl font-bold text-white flex items-center justify-center">
           {userData.data?.name
             ? userData.data.name.slice(0, 2).toUpperCase()
