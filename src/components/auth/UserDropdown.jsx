@@ -14,7 +14,7 @@ const UserDropdown = ({
   if (!isOpen || !userData?.data) return null;
 
   return (
-    <div className="absolute -right-6 mt-2 w-80 bg-white rounded-lg shadow-lg py-1 z-10">
+    <div className="absolute -right-10 mt-2 w-80 bg-white rounded-lg shadow-lg py-1 z-10">
       <div className="flex flex-row px-4 py-2 border-b bg-gray-100">
         <div className="w-20 h-20 rounded-full bg-blue-500 text-3xl font-bold text-white flex items-center justify-center">
           {userData.data?.name
