@@ -122,7 +122,7 @@ const Navbar = () => {
             ) : (
               <button
                 onClick={handleGetStarted}
-                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+                className="bg-blue-600 text-white text-center px-4 py-2 rounded-lg hover:bg-blue-700"
               >
                 Get Started
               </button>
@@ -164,12 +164,12 @@ const Navbar = () => {
 
       {/* Mobile Navigation */}
       <div className={`md:hidden ${isMenuOpen ? "block" : "hidden"}`}>
-        <div className="min-h-screen px-2 pt-2 pb-3 space-y-1 bg-white border-b text-center">
+        <div className="min-h-screen px-2 pt-20 pb-3 space-y-1 bg-white border-b text-center">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+              className="block px-3 py-2 rounded-md font-semibold text-3xl text-gray-600 hover:text-gray-900 hover:bg-gray-50"
               onClick={() => setIsMenuOpen(false)}
             >
               {link.text}
@@ -178,7 +178,7 @@ const Navbar = () => {
           {!isAuthenticated && (
             <button
               onClick={handleGetStarted}
-              className="w-full text-left px-3 py-2 rounded-md text-base font-medium text-white bg-blue-600 hover:bg-blue-700"
+              className="w-full text-center px-3 py-4 rounded-md text-base font-medium text-white bg-blue-600 hover:bg-blue-700"
             >
               Get Started
             </button>
