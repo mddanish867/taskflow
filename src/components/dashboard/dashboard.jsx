@@ -10,7 +10,7 @@ import {
   X,
   Loader,
   Moon,
-  Users
+  Users,
 } from "lucide-react";
 import { TabContent } from "./TabContent";
 import {
@@ -20,7 +20,7 @@ import {
 import { toast } from "../helper/toast";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import UserDropdown from '../auth/UserDropdown';
+import UserDropdown from "../auth/UserDropdown";
 
 const Dashboard = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -40,7 +40,6 @@ const Dashboard = () => {
 
   const { data: userData, isLoading } = useGetUserQuery(email);
 
- 
   const displayImageOrInitials = () => {
     if (!userData?.data) {
       return (
@@ -88,8 +87,8 @@ const Dashboard = () => {
     }
   };
   const handleSwitchAccount = () => {
-    navigate("/add-account")
-  }
+    navigate("/add-account");
+  };
 
   const tabs = [
     { id: "profile", label: "Profile", icon: UserCircle },
@@ -133,15 +132,15 @@ const Dashboard = () => {
               {displayImageOrInitials()}
             </button>
             {isUserDropdownOpen && userData?.data && (
-             <UserDropdown
-             isOpen={isUserDropdownOpen}
-             userData={userData}
-             handleLogOut={handleLogOut}
-             onClose={() => setIsUserDropdownOpen(false)}
-             displayImageOrInitials={displayImageOrInitials}
-             handleSwitchAccount={handleSwitchAccount}
-             setActiveTab = {setActiveTab}
-           />
+              <UserDropdown
+                isOpen={isUserDropdownOpen}
+                userData={userData}
+                handleLogOut={handleLogOut}
+                onClose={() => setIsUserDropdownOpen(false)}
+                displayImageOrInitials={displayImageOrInitials}
+                handleSwitchAccount={handleSwitchAccount}
+                setActiveTab={setActiveTab}
+              />
             )}
           </div>
         </div>

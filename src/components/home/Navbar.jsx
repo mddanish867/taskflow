@@ -56,7 +56,9 @@ const Navbar = () => {
   const displayUserAvatar = (size = "w-10 h-10", fontSize = "text-base") => {
     if (!userData?.data) {
       return (
-        <div className={`${size} flex items-center justify-center rounded-full bg-blue-600 text-white`}>
+        <div
+          className={`${size} flex items-center justify-center rounded-full bg-blue-600 text-white`}
+        >
           XX
         </div>
       );
@@ -64,7 +66,13 @@ const Navbar = () => {
 
     const user = userData.data;
     if (user.picture) {
-      return <img src={user.picture} alt="User avatar" className={`${size} rounded-full`} />;
+      return (
+        <img
+          src={user.picture}
+          alt="User avatar"
+          className={`${size} rounded-full`}
+        />
+      );
     }
 
     const initials = user.name
@@ -72,7 +80,9 @@ const Navbar = () => {
       : user.email.slice(0, 2).toUpperCase();
 
     return (
-      <div className={`${size} flex items-center justify-center rounded-full bg-blue-600 text-white font-semibold ${fontSize}`}>
+      <div
+        className={`${size} flex items-center justify-center rounded-full bg-blue-600 text-white font-semibold ${fontSize}`}
+      >
         {initials}
       </div>
     );
@@ -91,14 +101,20 @@ const Navbar = () => {
         <div className="flex justify-between h-16 items-center">
           <div className="flex items-center">
             <a href="/">
-              <span className="text-2xl font-bold text-blue-600">SooraAuth</span>
+              <span className="text-2xl font-bold text-blue-600">
+                SooraAuth
+              </span>
             </a>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className="text-gray-600 hover:text-gray-900">
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-gray-600 hover:text-gray-900"
+              >
                 {link.text}
               </a>
             ))}
@@ -115,7 +131,9 @@ const Navbar = () => {
                   userData={userData}
                   handleLogOut={handleLogout}
                   onClose={() => setIsUserDropdownOpen(false)}
-                  displayImageOrInitials={() => displayUserAvatar("w-16 h-16", "text-3xl")}
+                  displayImageOrInitials={() =>
+                    displayUserAvatar("w-16 h-16", "text-3xl")
+                  }
                   handleSwitchAccount={handleSwitchAccount}
                 />
               </div>
@@ -131,8 +149,19 @@ const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex flex-row">
+            <button
+              onClick={toggleMenu}
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+            >
+              <span className="sr-only">Open main menu</span>
+              {isMenuOpen ? (
+                <X className="block h-6 w-6" />
+              ) : (
+                <EllipsisVertical className="block h-6 w-6" />
+              )}
+            </button>
             {isAuthenticated && (
-              <div className="relative">
+              <div className="relative right-4">
                 <button
                   onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
                   className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-full"
@@ -145,19 +174,14 @@ const Navbar = () => {
                     userData={userData}
                     handleLogOut={handleLogout}
                     onClose={() => setIsUserDropdownOpen(false)}
-                    displayImageOrInitials={() => displayUserAvatar("w-16 h-16", "text-3xl")}
+                    displayImageOrInitials={() =>
+                      displayUserAvatar("w-16 h-16", "text-3xl")
+                    }
                     handleSwitchAccount={handleSwitchAccount}
                   />
                 </div>
               </div>
             )}
-            <button
-              onClick={toggleMenu}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
-            >
-              <span className="sr-only">Open main menu</span>
-              {isMenuOpen ? <X className="block h-6 w-6" /> : <EllipsisVertical className="block h-6 w-6" />}
-            </button>
           </div>
         </div>
       </div>
