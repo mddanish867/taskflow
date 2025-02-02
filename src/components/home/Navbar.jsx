@@ -139,7 +139,7 @@ const Navbar = () => {
                 >
                   {displayUserAvatar()}
                 </button>
-                <div className="right-10">
+                <div className="left-10">
                   <UserDropdown
                     isOpen={isUserDropdownOpen}
                     userData={userData}
