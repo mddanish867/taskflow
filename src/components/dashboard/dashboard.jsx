@@ -116,7 +116,7 @@ const Dashboard = () => {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="lg:hidden p-2 hover:bg-gray-100 rounded-lg"
             >
-              {isMenuOpen ? <X size={24} /> : <MenuIcon size={24} />}
+              {isMenuOpen ? <X size={24} /> : <MenuIcon size={28} />}
             </button>
             <a href="/" className="text-2xl font-bold text-blue-600">
               SooraAuth
