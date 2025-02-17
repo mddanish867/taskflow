@@ -1,8 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useMemo } from "react";
 import { EllipsisVertical, X } from "lucide-react";
 import UserDropdown from "../auth/UserDropdown";
-import { useGetUserQuery } from "../api/authAPI/authApiSlice";
 import { jwtDecode } from "jwt-decode";
 
 const Navbar = () => {
@@ -10,55 +9,47 @@ const Navbar = () => {
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
-  // Get token and email only once on mount and cache it
-  const { token, email, isAuthenticated } = useMemo(() => {
+  // Get all user data from token
+  const { userData, isAuthenticated } = useMemo(() => {
     const token = localStorage.getItem("access_token");
-    let email = null;
-    
-    if (token) {
-      try {
-        email = jwtDecode(token).email;
-      } catch (e) {
-        console.error("Error decoding token:", e);
-      }
+    if (!token) {
+      return { userData: null, isAuthenticated: false };
     }
 
-    return {
-      token,
-      email,
-      isAuthenticated: !!token
-    };
-  }, []); // Empty deps array means this only runs once on mount
-
-  // Only fetch user data if we have an email
-  const { data: userData } = useGetUserQuery(email, {
-    // Skip the query if we don't have an email
-    skip: !email,
-    // Cache the result for 5 minutes
-    refetchOnMountOrArgChange: 300
-  });
-
-  // Memoized handlers to prevent unnecessary re-renders
-  const handleGetStarted = useCallback(() => {
-    navigate("/login");
-    setIsMenuOpen(false);
-  }, [navigate]);
-
-  const handleLogout = useCallback(() => {
-    localStorage.removeItem("access_token");
-    navigate("/login");
-  }, [navigate]);
-
-  const handleSwitchAccount = useCallback(() => {
-    navigate("/add-account");
-  }, [navigate]);
-
-  const toggleMenu = useCallback(() => {
-    setIsMenuOpen(prev => !prev);
+    try {
+      const decoded = jwtDecode(token);
+      return {
+        userData: {
+          data: {
+            email: decoded.email,
+            username: decoded.name || decoded.email,
+            name: decoded.name || decoded.email,
+            picture: decoded.picture || null
+          }
+        },
+        isAuthenticated: true
+      };
+    } catch (e) {
+      console.error("Error decoding token:", e);
+      return { userData: null, isAuthenticated: false };
+    }
   }, []);
 
-  // Memoized avatar display function
-  const displayUserAvatar = useCallback((size = "w-10 h-10", fontSize = "text-base") => {
+  const handleGetStarted = () => {
+    navigate("/login");
+    setIsMenuOpen(false);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("access_token");
+    navigate("/login");
+  };
+
+  const handleSwitchAccount = () => {
+    navigate("/add-account");
+  };
+
+  const displayUserAvatar = (size = "w-10 h-10", fontSize = "text-base") => {
     if (!userData?.data) {
       return (
         <div className={`${size} flex items-center justify-center rounded-full bg-blue-600 text-white`}>
@@ -87,18 +78,16 @@ const Navbar = () => {
         {initials}
       </div>
     );
-  }, [userData]);
+  };
 
-  // Memoized navigation links
-  const navLinks = useMemo(() => [
+  const navLinks = [
     { href: "/features", text: "Features" },
     { href: "/pricing", text: "Pricing" },
     { href: "/contact", text: "Contact" },
-  ], []);
+  ];
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/75 backdrop-blur-md border-b">
-      {/* Rest of the JSX remains the same */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           <div className="flex items-center">
@@ -149,7 +138,7 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile Menu Button */}
           <div className="md:hidden flex flex-row">
             {isAuthenticated && (
               <div className="relative -right-4">
@@ -174,7 +163,7 @@ const Navbar = () => {
               </div>
             )}
             <button
-              onClick={toggleMenu}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="inline-flex items-center justify-center p-4 -right-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 focus:outline-none"
             >
               <span className="sr-only">Open main menu</span>

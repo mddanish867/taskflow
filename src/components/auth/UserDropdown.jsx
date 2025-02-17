@@ -22,7 +22,7 @@ const UserDropdown = ({
             : userData.data?.email.slice(0, 2).toUpperCase()}
         </div>
         <div className="flex flex-col p-4">
-          <div className="font-semibold text-2xl">
+          <div className="font-semibold text-xl">
             {userData.data.name || userData.data.email}
           </div>
           <div className="text-sm text-gray-500">{userData.data.email}</div>
