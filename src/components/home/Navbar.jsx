@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { EllipsisVertical, X } from "lucide-react";
 import UserDropdown from "../auth/UserDropdown";
 import { useGetUserQuery } from "../api/authAPI/authApiSlice";
@@ -7,58 +7,61 @@ import { jwtDecode } from "jwt-decode";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
-  // Decode token to get email
-  const email = useMemo(() => {
-    try {
-      const token = localStorage.getItem("access_token");
-      return token ? jwtDecode(token).email : null;
-    } catch (e) {
-      console.error("Error decoding token:", e);
-      return null;
-    }
-  }, []);
-
-  // Fetch user data
-  const { data: userData } = useGetUserQuery(email);
-
-  // Check authentication status on mount
-  useEffect(() => {
+  // Get token and email only once on mount and cache it
+  const { token, email, isAuthenticated } = useMemo(() => {
     const token = localStorage.getItem("access_token");
-    setIsAuthenticated(!!token);
-  }, []);
+    let email = null;
+    
+    if (token) {
+      try {
+        email = jwtDecode(token).email;
+      } catch (e) {
+        console.error("Error decoding token:", e);
+      }
+    }
 
-  // Handlers
-  const handleGetStarted = () => {
+    return {
+      token,
+      email,
+      isAuthenticated: !!token
+    };
+  }, []); // Empty deps array means this only runs once on mount
+
+  // Only fetch user data if we have an email
+  const { data: userData } = useGetUserQuery(email, {
+    // Skip the query if we don't have an email
+    skip: !email,
+    // Cache the result for 5 minutes
+    refetchOnMountOrArgChange: 300
+  });
+
+  // Memoized handlers to prevent unnecessary re-renders
+  const handleGetStarted = useCallback(() => {
     navigate("/login");
     setIsMenuOpen(false);
-  };
+  }, [navigate]);
 
-  const handleLogout = () => {
+  const handleLogout = useCallback(() => {
     localStorage.removeItem("access_token");
-    setIsAuthenticated(false);
     navigate("/login");
-  };
+  }, [navigate]);
 
-  const handleSwitchAccount = () => {
+  const handleSwitchAccount = useCallback(() => {
     navigate("/add-account");
-  };
+  }, [navigate]);
 
-  // Toggle mobile menu
-  const toggleMenu = () => {
-    setIsMenuOpen((prev) => !prev);
-  };
+  const toggleMenu = useCallback(() => {
+    setIsMenuOpen(prev => !prev);
+  }, []);
 
-  // Display user avatar or initials
-  const displayUserAvatar = (size = "w-10 h-10", fontSize = "text-base") => {
+  // Memoized avatar display function
+  const displayUserAvatar = useCallback((size = "w-10 h-10", fontSize = "text-base") => {
     if (!userData?.data) {
       return (
-        <div
-          className={`${size} flex items-center justify-center rounded-full bg-blue-600 text-white`}
-        >
+        <div className={`${size} flex items-center justify-center rounded-full bg-blue-600 text-white`}>
           XX
         </div>
       );
@@ -80,23 +83,22 @@ const Navbar = () => {
       : user.email.slice(0, 2).toUpperCase();
 
     return (
-      <div
-        className={`${size} flex items-center justify-center rounded-full bg-blue-600 text-white font-semibold ${fontSize}`}
-      >
+      <div className={`${size} flex items-center justify-center rounded-full bg-blue-600 text-white font-semibold ${fontSize}`}>
         {initials}
       </div>
     );
-  };
+  }, [userData]);
 
-  // Navigation links
-  const navLinks = [
-    { href: "#features", text: "Features" },
+  // Memoized navigation links
+  const navLinks = useMemo(() => [
+    { href: "/features", text: "Features" },
     { href: "/pricing", text: "Pricing" },
     { href: "/contact", text: "Contact" },
-  ];
+  ], []);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/75 backdrop-blur-md border-b">
+      {/* Rest of the JSX remains the same */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           <div className="flex items-center">
@@ -147,9 +149,9 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile menu button */}
           <div className="md:hidden flex flex-row">
-          {isAuthenticated && (
+            {isAuthenticated && (
               <div className="relative -right-4">
                 <button
                   onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
@@ -182,7 +184,6 @@ const Navbar = () => {
                 <EllipsisVertical className="block h-6 w-6" />
               )}
             </button>
-            
           </div>
         </div>
       </div>

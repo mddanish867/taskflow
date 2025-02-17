@@ -6,6 +6,7 @@ import OTPVerification from "./components/auth/OTPVerification";
 import TaskFlow from "./components/home/LandingPage";
 import Pricing from "./components/pricing/Pricing";
 import Contact from "./components/contact/Contact";
+import Feature from "./components/features/Features"
 import Layout from "./components/layout/Layout";
 import SignupForm from "./components/auth/Signup";
 import Dashboard from "./components/dashboard/dashboard";
@@ -26,6 +27,8 @@ function App() {
               <Route path="/" element={<TaskFlow />} />
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/features" element={<Feature />} />
+
             </Route>
             {/* <Route path="/dashboard" element={<Dashboard />} /> */}
 
