@@ -6,7 +6,7 @@ import {
   Clock,
   LogOut,
   Trash2,
-  Menu as MenuIcon,
+  Grip as MenuIcon,
   X,
   Loader,
   Moon,
