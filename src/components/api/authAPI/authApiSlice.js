@@ -105,6 +105,12 @@ export const authApiSlice = createApi({
         url: `auth/get-sessions`,        
       }),
     }),
+    revokeSession: builder.mutation({
+      query: (id) => ({
+        url: `auth/revoke-session?${id}=`,
+        method: 'GET',
+      }),      
+    }),
   }),
 });
 
@@ -122,5 +128,6 @@ export const {
   useEnable2FAMutation,
   useDisable2FAMutation,
   useDeleteAccountMutation,
-  useGetSessionsQuery
+  useGetSessionsQuery,
+  useRevokeSessionMutation 
 } = authApiSlice;
