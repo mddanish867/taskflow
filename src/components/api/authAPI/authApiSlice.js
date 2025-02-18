@@ -100,6 +100,11 @@ export const authApiSlice = createApi({
         body: userData,
       }),
     }),
+    getSessions: builder.query({
+      query: () => ({
+        url: `auth/get-sessions`,        
+      }),
+    }),
   }),
 });
 
@@ -116,5 +121,6 @@ export const {
   useUpdatePasswordMutation,
   useEnable2FAMutation,
   useDisable2FAMutation,
-  useDeleteAccountMutation
+  useDeleteAccountMutation,
+  useGetSessionsQuery
 } = authApiSlice;
