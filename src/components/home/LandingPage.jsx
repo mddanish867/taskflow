@@ -1,6 +1,8 @@
 import React from 'react';
 import { CheckCircle, BarChart2, Calendar, Users, ArrowRight, EllipsisVertical, X } from 'lucide-react';
-
+import Feature from '../features/Features';
+import Pricing from '../pricing/Pricing';
+import Contact from '../contact/Contact';
 const TaskFlow = () => {
   
 
@@ -41,7 +43,9 @@ const TaskFlow = () => {
           </div>
         </div>
 
-       
+       <Feature/>
+       <Pricing/>
+        <Contact/>
 
         {/* CTA Section */}
         <div className="bg-blue-600">
